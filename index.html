@@ -17,6 +17,7 @@
             --text-soft: #334155;
             --text-muted: #475569;
             --border-light: #e2e8f0;
+            --accent: #6366f1;
             --card-border: #eef2ff;
             --shadow-sm: 0 4px 10px rgba(0,0,0,0.03);
             --shadow-md: 0 12px 28px -8px rgba(0,0,0,0.08);
@@ -38,6 +39,17 @@
             color: var(--text-main);
             line-height: 1.5;
             scroll-behavior: smooth;
+        }
+
+        /* Scroll Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .container {
@@ -120,7 +132,7 @@
         #home {
             padding-top: 0;   /* agar banner langsung menempel navbar */
         }
-
+        
         .hero {
             padding: 0 0 40px;
             text-align: center;
@@ -309,15 +321,31 @@
             border: 1px solid var(--card-border);
             box-shadow: var(--shadow-sm);
         }
-        .project-info h3 {
-            font-size: 1.5rem;
-            margin-bottom: 12px;
-            color: var(--primary-dark);
+        .project-header {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 30px;
+            align-items: center;
         }
-        .project-info p {
-            color: var(--text-muted);
-            margin-bottom: 20px;
-            max-width: 800px;
+        @media (max-width: 768px) {
+            .project-header { grid-template-columns: 1fr; }
+        }
+        .project-cover-img {
+            width: 100%;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-light);
+        }
+        .project-info h3 { font-size: 1.6rem; margin-bottom: 10px; color: var(--primary-dark); }
+        .project-info p { color: var(--text-muted); margin-bottom: 15px; }
+        .tech-tags {
+            display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px;
+        }
+        .tag {
+            padding: 4px 12px; background: #eff6ff; color: var(--primary);
+            font-size: 0.75rem; font-weight: 700; border-radius: 8px; text-transform: uppercase;
         }
         .preview-controls {
             display: flex;
@@ -610,14 +638,14 @@
 
 <main id="main-content">
     <!-- BANNER FULL WIDTH, MENEMPEL NAVBAR -->
-    <img src="Banner-Portfolio1900x600.png" 
+    <img src="Banner-Portfolio1900x600.png"
          alt="Banner Portfolio Raka Faiza Billah" 
          class="hero-banner"
          loading="eager">
 
-    <section id="home">
+    <section id="home" class="reveal">
         <div class="container hero">
-            <h1>Raka Faiza Billah</h1>
+            <h1>Digital Solutions Specialist</h1>
             <p>Portfolio — pengembang aplikasi multiplatform & desain kreatif. <br> Menyajikan karya nyata dari pengalaman industri dan pendidikan.</p>
             <div class="quick-buttons">
                 <a href="#skills" class="btn btn-primary"><i class="fas fa-code" aria-hidden="true"></i> Skill</a>
@@ -629,7 +657,7 @@
     </section>
 
     <!-- SKILLS SECTION -->
-    <section id="skills">
+    <section id="skills" class="reveal">
         <div class="container">
             <h2 class="section-title">Keahlian & Teknologi</h2>
             <div class="skills-grid">
@@ -641,7 +669,7 @@
         </div>
     </section>
 
-    <section id="projects">
+    <section id="projects" class="reveal">
         <div class="container">
             <h2 class="section-title">Galeri Project</h2>
             <div class="project-tabs" id="projectTabs">
@@ -655,7 +683,7 @@
         </div>
     </section>
 
-    <section id="about">
+    <section id="about" class="reveal">
         <div class="container">
             <h2 class="section-title">Tentang Saya</h2>
             <div class="about-grid">
@@ -676,7 +704,7 @@
         </div>
     </section>
 
-    <section id="contact">
+    <section id="contact" class="reveal">
         <div class="container">
             <h2 class="section-title">Hubungi Saya</h2>
             <div class="contact-card">
@@ -789,28 +817,41 @@
                 groupDiv.className = "project-group";
                 
                 const imagesHtml = group.images.map(img => `
-                    <div class="card" onclick="openModal('${img}', '${title}')">
-                        <img class="card-img" src="${img}" alt="${title}" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=Image+Not+Found'">
-                    </div>
+                        <div class="card" onclick="openModal('${img}', '${title}')">
+                            <img class="card-img" src="${img}" alt="${title}" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=Image+Not+Found'">
+                        </div>
                 `).join('');
 
                 groupDiv.innerHTML = `
-                    <div class="project-info">
-                        <h3>${title}</h3>
-                        <p>${group.desc}</p>
-                        <div class="preview-controls">
+                    <div class="project-header">
+                        <img src="${group.images[0]}" class="project-cover-img" alt="Cover ${title}" onerror="this.src='https://via.placeholder.com/600x400?text=Project+Preview'">
+                        <div class="project-info">
+                            <h3>${title}</h3>
+                            <div class="tech-tags" id="tags-${index}"></div>
+                            <p>${group.desc}</p>
+                            <div class="preview-controls">
                             <button class="btn btn-primary btn-preview" id="btn-show-${index}">
-                                <i class="fas fa-images"></i> Lihat Preview (${group.images.length} Foto)
+                                    <i class="fas fa-eye"></i> Detail Visual (${group.images.length})
                             </button>
                             <button class="btn btn-outline btn-preview" id="btn-hide-${index}" style="display:none;">
                                 <i class="fas fa-times"></i> Tutup Preview
                             </button>
                         </div>
                     </div>
+                    </div>
                     <div class="preview-gallery-wrapper gallery-grid" id="gallery-${index}" style="display:none;">
                         ${imagesHtml}
                     </div>
                 `;
+
+                // Dummy Tags Logic based on title
+                const tagContainer = groupDiv.querySelector(`#tags-${index}`);
+                let tags = ["Project"];
+                if(title.includes("Excel")) tags = ["Data Analysis", "Ms. Office", "VLOOKUP"];
+                if(title.includes("Raone") || title.includes("Rumpin")) tags = ["Flutter", "Dart", "Supabase", "Mobile"];
+                if(title.includes("Web") || title.includes("Bersuara")) tags = ["React", "CSS3", "JavaScript", "Export Excel"];
+                if(title.includes("Desktop")) tags = ["C#", ".NET", "WinForms", "SQL Server"];
+                tags.forEach(t => tagContainer.innerHTML += `<span class="tag">${t}</span>`);
 
                 galleryContainer.appendChild(groupDiv);
 
@@ -874,6 +915,18 @@
             });
         }
 
+        // Scroll Reveal Logic
+        function reveal() {
+            const reveals = document.querySelectorAll(".reveal");
+            reveals.forEach(r => {
+                const windowHeight = window.innerHeight;
+                const elementTop = r.getBoundingClientRect().top;
+                const elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) r.classList.add("active");
+            });
+        }
+        window.addEventListener("scroll", reveal);
+
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 const targetId = this.getAttribute('href');
@@ -891,6 +944,7 @@
         document.getElementById("currentYear").textContent = new Date().getFullYear();
         renderGallery("ms365");
         initTabs();
+        reveal(); // Run once on load
         console.log("✅ Portfolio siap dengan banner, deskripsi Raone baru, dan kontak Instagram.");
     })();
 </script>
