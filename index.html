@@ -228,7 +228,7 @@
 
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 28px;
         }
         .skill-card {
@@ -300,6 +300,43 @@
             box-shadow: inset 0 1px 4px rgba(0,0,0,0.02);
         }
 
+        /* Style baru untuk pengelompokan project */
+        .project-group {
+            background: white;
+            border-radius: 24px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid var(--card-border);
+            box-shadow: var(--shadow-sm);
+        }
+        .project-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            color: var(--primary-dark);
+        }
+        .project-info p {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            max-width: 800px;
+        }
+        .preview-controls {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 0;
+        }
+        .btn-preview {
+            padding: 10px 20px;
+            font-size: 0.9rem;
+            border-radius: 12px;
+        }
+        .preview-gallery-wrapper {
+            display: none;
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 1px dashed var(--border-light);
+            animation: fadeUp 0.3s ease;
+        }
+
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -344,12 +381,6 @@
             font-size: 0.9rem;
             color: var(--text-muted);
             line-height: 1.5;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-overflow: ellipsis;
         }
 
         .about-grid {
@@ -604,7 +635,7 @@
             <div class="skills-grid">
                 <div class="skill-card"><i class="fab fa-microsoft" aria-hidden="true"></i><h3>Microsoft Office Suite</h3><p>Mahir menggunakan Microsoft Word, Excel, dan PowerPoint. Terbiasa melakukan entri data, pembuatan laporan, analisis data dengan rumus dan pivot, serta presentasi profesional.</p></div>
                 <div class="skill-card"><i class="fab fa-android" aria-hidden="true"></i><h3>Android (Flutter)</h3><p>Pengembangan aplikasi mobile modern, state management, API integration, dan UI/UX responsif.</p></div>
-                <div class="skill-card"><i class="fas fa-globe" aria-hidden="true"></i><h3>Web Development</h3><p>HTML, CSS, JavaScript, React, serta desain web portfolio interaktif dan dinamis.</p></div>
+                <div class="skill-card"><i class="fas fa-globe" aria-hidden="true"></i><h3>Web Development</h3><p>HTML, CSS, JavaScript, React, serta web interaktif dan dinamis.</p></div>
                 <div class="skill-card"><i class="fas fa-laptop-code" aria-hidden="true"></i><h3>Desktop App (.NET C#)</h3><p>Aplikasi kasir, manajemen data dengan Windows Forms, database SQL, dan laporan.</p></div>
             </div>
         </div>
@@ -638,7 +669,7 @@
                 </div>
                 <div class="background-text">
                     <h3>Latar Belakang & Perjalanan</h3>
-                    <p>Saya seorang pengembang muda dengan semangat tinggi dalam teknologi dan inovasi. Saat ini menempuh pendidikan di SMKN 1 Sumedang jurusan Pengembangan Perangkat Lunak dan Gim (PPLG). Telah mengerjakan berbagai proyek mulai dari aplikasi kasir berbasis dekstop, sistem manajemen yayasan (Rumpin), aplikasi kesehatan offline Cekdong, hingga berbagai web portfolio interaktif. Terbiasa dengan kolaborasi tim, eksplorasi teknologi baru, dan selalu berusaha memberikan solusi terbaik untuk kebutuhan digital.</p>
+                    <p>Saya seorang pengembang muda dengan semangat tinggi dalam teknologi dan inovasi. Saat ini menempuh pendidikan di SMKN 1 Sumedang jurusan Pengembangan Perangkat Lunak dan Gim (PPLG). Telah mengerjakan berbagai proyek mulai dari aplikasi kasir berbasis dekstop, sistem manajemen yayasan (Rumpin), website aspirasi siswa "Bersuara Yuk" dengan fitur manajemen laporan dan ekspor excel, hingga sistem role based, serta kemampuan dalam mengolah data entri dan word. Terbiasa dengan kolaborasi tim, eksplorasi teknologi baru, dan selalu berusaha memberikan solusi terbaik untuk kebutuhan digital.</p>
                     <p>Saya percaya bahwa kode yang baik dapat mengubah ide menjadi dampak nyata. Portfolio ini merupakan wadah untuk menunjukkan dedikasi dan karya yang telah dibuat.</p>
                 </div>
             </div>
@@ -680,40 +711,33 @@
         const ms365Cards = [];
         for (let i = 1; i <= 6; i++) {
             ms365Cards.push({
-                title: `Excel – Analisis Data & Laporan (${i}/6)`,
+                title: `Excel – Analisis Data & Laporan`,
                 desc: `Contoh hasil kerja Microsoft Excel: pengolahan data, rumus, pivot table, dan visualisasi. Kemampuan juga mencakup Word (dokumen) dan PowerPoint (presentasi) serta data entry.`,
                 image: `ex${i}.png`
             });
         }
 
         const androidCards = [];
-        for (let i = 1; i <= 4; i++) {
-            androidCards.push({
-                title: `Cekdong - Aplikasi Kesehatan Mandiri (${i}/4)`,
-                desc: `Aplikasi cek kesehatan mandiri sederhana tanpa internet. Fitur diagnosa sederhana, dan penanganan P3K yang umum terjadi. (Screenshot ${i})`,
-                image: `cek${i}.jpg`
-            });
-        }
         for (let i = 1; i <= 3; i++) {
             androidCards.push({
-                title: `Kasir Raone - Aplikasi Kasir UMKM (${i}/3)`,
+                title: `Kasir Raone - Aplikasi Kasir UMKM`,
                 desc: `Raone Management System: kasir + manajemen keuangan mikro. Transaksi, omzet & grafik, histori, penyimpanan lokal, cetak struk PNG. Dalam pengembangan & update rutin.`,
                 image: `k${i}.jpg`
             });
         }
         for (let i = 1; i <= 8; i++) {
             androidCards.push({
-                title: `Rumpin - Manajemen Yayasan (${i}/8)`,
-                desc: `Sistem informasi pengelolaan yayasan: data user/murid, UMKM melalui yayasan, kegiatan, notifikasi umum, dan laporan berbasis database online (Supabase). (Dokumentasi ${i})`,
+                title: `Rumpin - Manajemen Yayasan`,
+                desc: `Sistem informasi pengelolaan yayasan: data user/murid, UMKM melalui yayasan, kegiatan, notifikasi umum, dan laporan berbasis database online (Supabase).`,
                 image: `m${i}.jpg`
             });
         }
 
         const webCards = [];
-        for (let i = 1; i <= 11; i++) {
+        for (let i = 1; i <= 6; i++) {
             webCards.push({
-                title: `Web Portfolio Project ${i}`,
-                desc: `Desain dan pengembangan website portfolio responsif, modern, dengan teknologi terkini.`,
+                title: `Web aspirasi siswa : Bersuara Yuk`,
+                desc: `aspirasi dan pengaduan online dengan sistem manajemen laporan dan akun oleh admin serta rangkuman ringkasan data yang dapat di eksport ke excel`,
                 image: `w${i}.png`
             });
         }
@@ -722,7 +746,7 @@
         for (let i = 1; i <= 3; i++) {
             desktopCards.push({
                 title: `Kasir Desktop (C# .NET WinForms)`,
-                desc: `Aplikasi kasir berbasis Windows Forms dengan database SQL Server, laporan transaksi, dan manajemen stok. (Preview ${i})`,
+                desc: `Aplikasi kasir berbasis Windows Forms dengan database SQL Server, laporan transaksi, dan manajemen stok.`,
                 image: `d${i}.png`
             });
         }
@@ -730,8 +754,8 @@
         const projectsData = { ms365: ms365Cards, android: androidCards, web: webCards, desktop: desktopCards };
         const tabDescriptions = {
             ms365: "📊 Microsoft Office Suite: Kemampuan menggunakan Word (dokumen, surat, laporan), Excel (entri data, formula, pivot, chart), dan PowerPoint (presentasi profesional). Galeri menampilkan 6 contoh hasil kerja di Excel.",
-            android: "📱 Android (Flutter) — Aplikasi nyata: Manajemen Yayasan 'Rumpin' (12 foto), Aplikasi Kesehatan Offline 'Cekdong' (4 foto), dan Aplikasi Kasir 'Kasir Raone' (3 foto). Total 15.",
-            web: "🌐 Web Portfolio & Pengembangan Web: Kumpulan desain website portfolio interaktif, company profile, dan aplikasi web yang pernah dibuat. 11 preview karya.",
+            android: "📱 Android (Flutter) — Aplikasi nyata: Manajemen Yayasan 'Rumpin' (8 foto), dan Aplikasi Kasir 'Kasir Raone' (3 foto). Total 11.",
+            web: "🌐 Pengembangan Web: Kumpulan preview website aspirasi interaktif, dengan fitur-fitur yang di sesuaikan untuk keperluan manajemen sekolah. 6 preview karya.",
             desktop: "🖥️ Desktop Application: Aplikasi Kasir berbasis C# .NET Windows Forms dengan fitur transaksi, laporan, dan manajemen stok. 3 tampilan utama aplikasi."
         };
 
@@ -739,27 +763,72 @@
         const galleryContainer = document.getElementById("galleryContainer");
         const tabDescEl = document.getElementById("tabDescription");
 
+        // Fungsi untuk mengelompokkan data berdasarkan judul
+        function groupProjects(data) {
+            return data.reduce((acc, curr) => {
+                if (!acc[curr.title]) {
+                    acc[curr.title] = { desc: curr.desc, images: [] };
+                }
+                acc[curr.title].images.push(curr.image);
+                return acc;
+            }, {});
+        }
+
         function renderGallery(category) {
-            const cards = projectsData[category];
             if (!galleryContainer) return;
             galleryContainer.innerHTML = "";
-            cards.forEach((card) => {
-                const cardDiv = document.createElement("div");
-                cardDiv.className = "card";
-                cardDiv.setAttribute("data-fullimage", card.image);
-                cardDiv.setAttribute("data-caption", `${card.title} — ${card.desc}`);
-                cardDiv.innerHTML = `
-                    <img class="card-img" src="${card.image}" alt="${card.title}" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=Image+Not+Found'">
-                    <div class="card-content">
-                        <div class="card-title">${card.title}</div>
-                        <div class="card-desc">${card.desc}</div>
+            
+            // Ubah grid display menjadi block untuk pembungkus group
+            galleryContainer.style.display = "block";
+
+            const groups = groupProjects(projectsData[category]);
+
+            Object.keys(groups).forEach((title, index) => {
+                const group = groups[title];
+                const groupDiv = document.createElement("div");
+                groupDiv.className = "project-group";
+                
+                const imagesHtml = group.images.map(img => `
+                    <div class="card" onclick="openModal('${img}', '${title}')">
+                        <img class="card-img" src="${img}" alt="${title}" loading="lazy" onerror="this.src='https://via.placeholder.com/400x300?text=Image+Not+Found'">
+                    </div>
+                `).join('');
+
+                groupDiv.innerHTML = `
+                    <div class="project-info">
+                        <h3>${title}</h3>
+                        <p>${group.desc}</p>
+                        <div class="preview-controls">
+                            <button class="btn btn-primary btn-preview" id="btn-show-${index}">
+                                <i class="fas fa-images"></i> Lihat Preview (${group.images.length} Foto)
+                            </button>
+                            <button class="btn btn-outline btn-preview" id="btn-hide-${index}" style="display:none;">
+                                <i class="fas fa-times"></i> Tutup Preview
+                            </button>
+                        </div>
+                    </div>
+                    <div class="preview-gallery-wrapper gallery-grid" id="gallery-${index}" style="display:none;">
+                        ${imagesHtml}
                     </div>
                 `;
-                cardDiv.addEventListener("click", (e) => {
-                    e.stopPropagation();
-                    openModal(card.image, `${card.title} — ${card.desc}`);
+
+                galleryContainer.appendChild(groupDiv);
+
+                // Logika Toggle Preview
+                const showBtn = groupDiv.querySelector(`#btn-show-${index}`);
+                const hideBtn = groupDiv.querySelector(`#btn-hide-${index}`);
+                const gallery = groupDiv.querySelector(`#gallery-${index}`);
+
+                showBtn.addEventListener("click", () => {
+                    gallery.style.display = "grid";
+                    showBtn.style.display = "none";
+                    hideBtn.style.display = "inline-flex";
                 });
-                galleryContainer.appendChild(cardDiv);
+                hideBtn.addEventListener("click", () => {
+                    gallery.style.display = "none";
+                    showBtn.style.display = "inline-flex";
+                    hideBtn.style.display = "none";
+                });
             });
             if (tabDescEl) tabDescEl.textContent = tabDescriptions[category] || "Galeri project tersedia.";
         }
@@ -769,14 +838,14 @@
         const modalCaption = document.getElementById("modalCaption");
         const closeModalBtn = document.querySelector(".close-modal");
 
-        function openModal(imgSrc, caption) {
+        window.openModal = function(imgSrc, caption) {
             if (!modal) return;
             modal.style.display = "flex";
             modalImage.src = imgSrc;
             modalCaption.textContent = caption;
             document.body.style.overflow = "hidden";
             closeModalBtn.focus();
-        }
+        };
         function closeModal() {
             if (!modal) return;
             modal.style.display = "none";
